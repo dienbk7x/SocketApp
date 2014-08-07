@@ -58,4 +58,33 @@
     
 }
 
+- (IBAction)shutdown:(id)sender {
+
+	NSData *data = [[NSData alloc] initWithData:[@"shutdown" dataUsingEncoding:NSASCIIStringEncoding]];
+    [_outputStream write:[data bytes] maxLength:[data length]];
+    
+}
+
+- (IBAction)reboot:(id)sender {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"REBOOT?" message:@"Are you sure you want to reboot?" delegate:self cancelButtonTitle:@"OH.. Hell No!" otherButtonTitles:@"I said REBOOT!", nil];
+    
+    [alert show];
+
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if(buttonIndex == 1){
+        
+        NSData *data = [[NSData alloc] initWithData:[@"reboot" dataUsingEncoding:NSASCIIStringEncoding]];
+        [_outputStream write:[data bytes] maxLength:[data length]];
+        NSLog(@"YES %@",data);
+    }
+}
+
+- (IBAction)reset:(id)sender {
+    [self initNetworkCommunication];
+}
+
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController<NSStreamDelegate>
+@interface ViewController : UIViewController<NSStreamDelegate,UIAlertViewDelegate>
 {
 
 }
@@ -18,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *lightToggle;
 
 - (IBAction)ToggleLight:(id)sender;
+- (IBAction)shutdown:(id)sender;
+- (IBAction)reboot:(id)sender;
+- (IBAction)reset:(id)sender;
 
 
 
