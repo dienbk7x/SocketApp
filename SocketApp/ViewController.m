@@ -18,16 +18,20 @@
 {
     [super viewDidLoad];
     
-    
+    [self initNetworkCommunication];
+
+    //used so that when you minimize the app it inits the the network again.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationEnteredForeground:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
     
     _lightToggle.selectedSegmentIndex = 1;
 }
 
-- (void)viewDidAppear:(BOOL)animated{
+- (void)applicationEnteredForeground:(NSNotification *)notification {
     [self initNetworkCommunication];
-
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
