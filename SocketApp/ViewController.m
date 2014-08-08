@@ -27,6 +27,19 @@
                                                object:nil];
     
     _lightToggle.selectedSegmentIndex = 1;
+    
+    
+    _logo.layer.cornerRadius = _logo.frame.size.width / 2;
+    _logo.clipsToBounds = YES;
+    _logo.layer.borderColor = [[UIColor whiteColor] CGColor];
+    _logo.layer.borderWidth = 6;
+    
+//    CAGradientLayer *gradient = [CAGradientLayer layer];
+//    gradient.frame = self.view.bounds;
+//   gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:(2/255.0f) green:(160/255.0f) blue:(224/255.0f) alpha:1] CGColor], (id)[[UIColor whiteColor] CGColor], nil];
+   // [self.view.layer insertSublayer:gradient atIndex:0];
+    
+    self.view.backgroundColor = [UIColor colorWithRed:(2/255.0f) green:(160/255.0f) blue:(224/255.0f) alpha:1];
 }
 
 - (void)applicationEnteredForeground:(NSNotification *)notification {
