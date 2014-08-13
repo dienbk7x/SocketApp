@@ -39,10 +39,14 @@
 //   gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:(2/255.0f) green:(160/255.0f) blue:(224/255.0f) alpha:1] CGColor], (id)[[UIColor whiteColor] CGColor], nil];
    // [self.view.layer insertSublayer:gradient atIndex:0];
     
+    _ipFieldHolder = @"192.168.0.119";
+    
     self.view.backgroundColor = [UIColor colorWithRed:(2/255.0f) green:(160/255.0f) blue:(224/255.0f) alpha:1];
+    _ipView.backgroundColor = self.view.backgroundColor;
 }
 
 - (void)applicationEnteredForeground:(NSNotification *)notification {
+    _ipFieldHolder = @"192.168.0.119";
     [self initNetworkCommunication];
 }
 - (void)didReceiveMemoryWarning
@@ -52,9 +56,11 @@
 }
 
 - (void)initNetworkCommunication {
+    
     CFReadStreamRef readStream;
     CFWriteStreamRef writeStream;
-    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"192.168.0.117", 7777, &readStream, &writeStream);
+
+    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)_ipField.text, 7777, &readStream, &writeStream);
     _inputStream = (NSInputStream *)CFBridgingRelease(readStream);
     _outputStream = (NSOutputStream *)CFBridgingRelease(writeStream);
     
@@ -107,6 +113,19 @@
 
 - (IBAction)reset:(id)sender {
     [self initNetworkCommunication];
+}
+
+- (IBAction)changeIP:(id)sender {
+    _ipField.text = _ipFieldHolder;
+    _ipField.keyboardType = UIKeyboardTypeDecimalPad;
+    [_ipView setHidden:NO];
+}
+
+- (IBAction)iPSet:(id)sender {
+    _ipFieldHolder = _ipField.text;
+    [self initNetworkCommunication];
+    [self.view endEditing:YES];
+    [_ipView setHidden:YES];
 }
 
 @end

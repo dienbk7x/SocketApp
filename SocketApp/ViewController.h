@@ -10,18 +10,24 @@
 
 @interface ViewController : UIViewController<NSStreamDelegate,UIAlertViewDelegate>
 {
-
+    
 }
 
 @property (nonatomic, retain) NSInputStream *inputStream;
 @property (nonatomic, retain) NSOutputStream *outputStream;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *lightToggle;
-@property (weak, nonatomic) IBOutlet UIImageView *logo;
+@property (weak, nonatomic) IBOutlet UIButton *logo;
+@property (strong, nonatomic) IBOutlet UITextField *ipField;
+@property (weak, nonatomic) NSString *ipFieldHolder;
+@property (weak, nonatomic) IBOutlet UIView *ipView;
+
 
 - (IBAction)ToggleLight:(id)sender;
 - (IBAction)shutdown:(id)sender;
 - (IBAction)reboot:(id)sender;
 - (IBAction)reset:(id)sender;
+- (IBAction)changeIP:(id)sender;
+- (IBAction)iPSet:(id)sender;
 
 
 
