@@ -90,7 +90,7 @@
         case NSStreamEventHasBytesAvailable:
             if (theStream == _inputStream) {
                 uint8_t buffer[1024];
-                int len;
+                long len;
                 
                 while ([_inputStream hasBytesAvailable]) {
                     len = [_inputStream read:buffer maxLength:sizeof(buffer)];
@@ -107,6 +107,7 @@
             break;
         case NSStreamEventErrorOccurred:
             NSLog(@"Can not connect to the host!");
+            [_serverMessages setText:@"Can not connect to the host!"];
             break;
         case NSStreamEventEndEncountered:
             NSLog(@"Closing stream...");
@@ -154,7 +155,7 @@
 
 - (IBAction)reboot:(id)sender {
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"REBOOT?" message:@"Are you sure you want to reboot?" delegate:self cancelButtonTitle:@"OH.. Hell No!" otherButtonTitles:@"I said REBOOT!", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"REBOOT?" message:@"Are you sure you want to reboot?" delegate:self cancelButtonTitle:@"OH.. No!" otherButtonTitles:@"I said REBOOT!", nil];
     
     [alert show];
 
