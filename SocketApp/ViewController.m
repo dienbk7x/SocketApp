@@ -18,6 +18,8 @@
 {
     [super viewDidLoad];
     
+    _ipFieldHolder = @"192.168.0.119";
+    
     [self initNetworkCommunication];
 
     //used so that when you minimize the app it inits the the network again.
@@ -39,7 +41,6 @@
 //   gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:(2/255.0f) green:(160/255.0f) blue:(224/255.0f) alpha:1] CGColor], (id)[[UIColor whiteColor] CGColor], nil];
    // [self.view.layer insertSublayer:gradient atIndex:0];
     
-    _ipFieldHolder = @"192.168.0.119";
     
     self.view.backgroundColor = [UIColor colorWithRed:(2/255.0f) green:(160/255.0f) blue:(224/255.0f) alpha:1];
     _ipView.backgroundColor = self.view.backgroundColor;
@@ -47,6 +48,7 @@
 
 - (void)applicationEnteredForeground:(NSNotification *)notification {
     _ipFieldHolder = @"192.168.0.119";
+    [_serverMessages setText:@""];
     [self initNetworkCommunication];
 }
 - (void)didReceiveMemoryWarning
@@ -60,7 +62,7 @@
     CFReadStreamRef readStream;
     CFWriteStreamRef writeStream;
 
-    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)_ipField.text, 7777, &readStream, &writeStream);
+    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)_ipFieldHolder, 7777, &readStream, &writeStream);
     _inputStream = (NSInputStream *)CFBridgingRelease(readStream);
     _outputStream = (NSOutputStream *)CFBridgingRelease(writeStream);
     
@@ -72,25 +74,82 @@
     
     [_inputStream open];
 	[_outputStream open];
+
     
+}
+
+/**
+ stream events 
+ */
+- (void)stream:(NSStream *)theStream handleEvent:(NSStreamEvent)streamEvent {
+    
+    switch (streamEvent) {
+        case NSStreamEventOpenCompleted:
+            NSLog(@"Stream opened for %@",_ipFieldHolder);
+            break;
+        case NSStreamEventHasBytesAvailable:
+            if (theStream == _inputStream) {
+                uint8_t buffer[1024];
+                int len;
+                
+                while ([_inputStream hasBytesAvailable]) {
+                    len = [_inputStream read:buffer maxLength:sizeof(buffer)];
+                    if (len > 0) {
+                        NSString *output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
+                        
+                        if (nil != output) {
+                            NSLog(@"Server said: %@", output);
+                            [_serverMessages setText:[NSString stringWithFormat:@"Server Said: %@",output]];
+                        }
+                    }
+                }
+            }
+            break;
+        case NSStreamEventErrorOccurred:
+            NSLog(@"Can not connect to the host!");
+            break;
+        case NSStreamEventEndEncountered:
+            NSLog(@"Closing stream...");
+            [theStream close];
+            [theStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+            theStream = nil;
+            break;
+        default:
+            NSLog(@"Unknown event");
+    }
 }
 
 - (IBAction)ToggleLight:(id)sender {
     
-    UISegmentedControl *button = ((UISegmentedControl*)sender);
-    long tag = button.tag;
+    @try {
+        UISegmentedControl *button = ((UISegmentedControl*)sender);
+        long tag = button.tag;
+        
+        NSString *response  = [NSString stringWithFormat:@"P%ld%@", tag , button.selectedSegmentIndex?@"H" : @"L"];
+        NSData *data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
+        [_outputStream write:[data bytes] maxLength:[data length]];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",[exception debugDescription]);
+    }
     
-	NSString *response  = [NSString stringWithFormat:@"P%ld%@", tag , button.selectedSegmentIndex?@"H" : @"L"];
-	NSData *data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
-    [_outputStream write:[data bytes] maxLength:[data length]];
+    
     
 }
 
 - (IBAction)shutdown:(id)sender {
 
-	NSData *data = [[NSData alloc] initWithData:[@"shutdown" dataUsingEncoding:NSASCIIStringEncoding]];
-    [_outputStream write:[data bytes] maxLength:[data length]];
+    @try {
+        NSData *data = [[NSData alloc] initWithData:[@"shutdown" dataUsingEncoding:NSASCIIStringEncoding]];
+        [_outputStream write:[data bytes] maxLength:[data length]];
+        
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",[exception debugDescription]);
+    }
+
     
+	
 }
 
 - (IBAction)reboot:(id)sender {

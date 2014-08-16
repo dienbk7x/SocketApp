@@ -81,14 +81,22 @@
                                     <action selector="changeIP:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="KKS-uQ-Bfh"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0TO-49-4TW">
+                                <rect key="frame" x="20" y="238" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="ipField" destination="46m-zB-Kh5" id="a0p-40-EMd"/>
                         <outlet property="ipView" destination="OqD-2L-uB4" id="OrW-uG-GC9"/>
                         <outlet property="lightToggle" destination="gf3-Ve-Bnk" id="tLj-9j-bxJ"/>
                         <outlet property="logo" destination="5EI-au-6Do" id="I46-ZF-o4Y"/>
+                        <outlet property="serverMessages" destination="0TO-49-4TW" id="ZOL-dh-6TY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

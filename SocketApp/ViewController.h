@@ -21,6 +21,7 @@
 @property (weak, nonatomic) NSString *ipFieldHolder;
 @property (weak, nonatomic) IBOutlet UIView *ipView;
 
+@property (weak, nonatomic) IBOutlet UILabel *serverMessages;
 
 - (IBAction)ToggleLight:(id)sender;
 - (IBAction)shutdown:(id)sender;
