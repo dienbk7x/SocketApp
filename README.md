@@ -11,6 +11,6 @@ This app will:
 
 - Determine all the current users logged into the raspberry pi
 
-![image](IMG_7400.PNG)
+![image](front.png)
 
-![image](IMG_7401.PNG)
+![image](back.png)
