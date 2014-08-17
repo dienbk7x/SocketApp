@@ -8,3 +8,8 @@ This app will turn on and off GPIO 7
 read the cpu temp of the raspberry pi
 
 and determine all the current users logged into the raspberry pi
+
+
+![image](IMG_7400.PNG)
+
+![image](IMG_7401.PNG)
