@@ -10,6 +10,72 @@
 
 @implementation AppDelegate
 
+
+- (void)initNetworkCommunication {
+    
+    CFReadStreamRef readStream;
+    CFWriteStreamRef writeStream;
+    
+    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)_ipFieldHolder, 7777, &readStream, &writeStream);
+    _inputStream = (NSInputStream *)CFBridgingRelease(readStream);
+    _outputStream = (NSOutputStream *)CFBridgingRelease(writeStream);
+    
+    [_inputStream setDelegate:self];
+	[_outputStream setDelegate:self];
+    
+    [_inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+	[_outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    
+    [_inputStream open];
+	[_outputStream open];
+    
+    
+}
+
+/**
+ stream events
+ */
+- (void)stream:(NSStream *)theStream handleEvent:(NSStreamEvent)streamEvent {
+    
+    switch (streamEvent) {
+        case NSStreamEventOpenCompleted:
+            NSLog(@"Stream opened for %@",_ipFieldHolder);
+            break;
+        case NSStreamEventHasBytesAvailable:
+            if (theStream == _inputStream) {
+                uint8_t buffer[1024];
+                long len;
+                
+                while ([_inputStream hasBytesAvailable]) {
+                    len = [_inputStream read:buffer maxLength:sizeof(buffer)];
+                    if (len > 0) {
+                        NSString *output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
+                        
+                        if (nil != output) {
+                            NSLog(@"Server said: %@", output);
+
+                            [[NSNotificationCenter defaultCenter] postNotificationName:MESSAGES_FROM_SEVER object:self userInfo:@{@"message":[NSString stringWithFormat:@"Server Said: %@",output]}];
+                        }
+                    }
+                }
+            }
+            break;
+        case NSStreamEventErrorOccurred:
+            NSLog(@"Can not connect to the host!");
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:MESSAGES_FROM_SEVER object:self userInfo:@{@"message":@"Can not connect to the host!"}];
+            break;
+        case NSStreamEventEndEncountered:
+            NSLog(@"Closing stream...");
+            [theStream close];
+            [theStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+            theStream = nil;
+            break;
+        default:
+            NSLog(@"Unknown event");
+    }
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.

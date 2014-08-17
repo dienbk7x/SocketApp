@@ -8,17 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController<NSStreamDelegate,UIAlertViewDelegate>
+@interface ViewController : UIViewController<UIAlertViewDelegate>
 {
     
 }
 
-@property (nonatomic, retain) NSInputStream *inputStream;
-@property (nonatomic, retain) NSOutputStream *outputStream;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *lightToggle;
 @property (weak, nonatomic) IBOutlet UIButton *logo;
 @property (strong, nonatomic) IBOutlet UITextField *ipField;
-@property (weak, nonatomic) NSString *ipFieldHolder;
+
 @property (weak, nonatomic) IBOutlet UIView *ipView;
 
 @property (weak, nonatomic) IBOutlet UILabel *serverMessages;
