@@ -36,7 +36,7 @@
     //register a notification for messages
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleMessages:)
-                                                 name:MESSAGES_FROM_SEVER
+                                                 name:MESSAGES_FROM_SEVER_STD
                                                object:nil];
     
     _lightToggle.selectedSegmentIndex = 1;

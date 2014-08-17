@@ -53,8 +53,14 @@
                         
                         if (nil != output) {
                             NSLog(@"Server said: %@", output);
-
-                            [[NSNotificationCenter defaultCenter] postNotificationName:MESSAGES_FROM_SEVER object:self userInfo:@{@"message":[NSString stringWithFormat:@"Server Said: %@",output]}];
+                            if([output rangeOfString:@"Users"].location != NSNotFound ){
+                                [[NSNotificationCenter defaultCenter] postNotificationName:MESSAGES_FROM_SEVER_USERS object:self userInfo:@{@"message":output}];
+                            }else if([output rangeOfString:@"Temperature"].location != NSNotFound ){
+                             [[NSNotificationCenter defaultCenter] postNotificationName:MESSAGES_FROM_SEVER_TEMP object:self userInfo:@{@"message":output}];
+                            }
+                            else {
+                                [[NSNotificationCenter defaultCenter] postNotificationName:MESSAGES_FROM_SEVER_STD object:self userInfo:@{@"message":[NSString stringWithFormat:@"Server Said: %@",output]}];
+                            }
                         }
                     }
                 }
@@ -63,7 +69,7 @@
         case NSStreamEventErrorOccurred:
             NSLog(@"Can not connect to the host!");
 
-            [[NSNotificationCenter defaultCenter] postNotificationName:MESSAGES_FROM_SEVER object:self userInfo:@{@"message":@"Can not connect to the host!"}];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MESSAGES_FROM_SEVER_STD object:self userInfo:@{@"message":@"Can not connect to the host!"}];
             break;
         case NSStreamEventEndEncountered:
             NSLog(@"Closing stream...");

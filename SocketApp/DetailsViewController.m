@@ -40,8 +40,13 @@
     
     //register a notification for messages
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleMessages:)
-                                                 name:MESSAGES_FROM_SEVER
+                                             selector:@selector(handleUsersMessages:)
+                                                 name:MESSAGES_FROM_SEVER_USERS
+                                               object:nil];
+    //register a notification for messages
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleTempMessages:)
+                                                 name:MESSAGES_FROM_SEVER_TEMP
                                                object:nil];
     
     self.view.backgroundColor = [UIColor colorWithRed:(2/255.0f) green:(160/255.0f) blue:(224/255.0f) alpha:1];
@@ -49,15 +54,28 @@
     
     NSData *data = [[NSData alloc] initWithData:[@"users" dataUsingEncoding:NSASCIIStringEncoding]];
     [appDelegate.outputStream write:[data bytes] maxLength:[data length]];
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSData *data = [[NSData alloc] initWithData:[@"temp" dataUsingEncoding:NSASCIIStringEncoding]];
+        [appDelegate.outputStream write:[data bytes] maxLength:[data length]];
+    });
+    
+    
     
     _serverMessages.layer.cornerRadius = 10;
+    _serverTemp.layer.cornerRadius =10;
 }
 
-//handles any messages posted
--(void)handleMessages:(NSNotification *) notification{
+#pragma mark - Messages
+-(void)handleUsersMessages:(NSNotification *) notification{
     
     [_serverMessages setText:notification.userInfo[@"message"]];
 }
+-(void)handleTempMessages:(NSNotification *) notification{
+    
+    [_serverTemp setText:notification.userInfo[@"message"]];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

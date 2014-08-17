@@ -15,4 +15,7 @@
     #import <Foundation/Foundation.h>
 #endif
 
-#define MESSAGES_FROM_SEVER @"server_messages"
+
+#define MESSAGES_FROM_SEVER_STD @"standard_report"
+#define MESSAGES_FROM_SEVER_USERS @"user_report"
+#define MESSAGES_FROM_SEVER_TEMP @"temperature_report"

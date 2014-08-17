@@ -13,6 +13,7 @@
 
 }
 @property (weak, nonatomic) IBOutlet UITextView *serverMessages;
+@property (weak, nonatomic) IBOutlet UITextView *serverTemp;
 
 - (IBAction)done:(id)sender;
 
