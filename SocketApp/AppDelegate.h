@@ -14,6 +14,9 @@
 
 - (void)initNetworkCommunication;
 
+-(void)saveUserIP:(NSString*)ip;
+-(NSString*)getUserIP;
+
 @property (nonatomic, retain) NSInputStream *inputStream;
 @property (nonatomic, retain) NSOutputStream *outputStream;
 @property (weak, nonatomic) NSString *ipFieldHolder;

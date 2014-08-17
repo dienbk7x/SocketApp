@@ -24,9 +24,6 @@
     
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    appDelegate.ipFieldHolder = @"192.168.0.119";
-    
-    [appDelegate initNetworkCommunication];
 
     //used so that when you minimize the app it inits the the network again.
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -70,12 +67,20 @@
     [super viewDidAppear:YES];
     
     [self setNeedsStatusBarAppearanceUpdate];
-    appDelegate.ipFieldHolder = @"192.168.0.119";
+    appDelegate.ipFieldHolder = [appDelegate getUserIP];
+    
+    //if no ip set one
+    if([appDelegate.ipFieldHolder isEqualToString:@"0.0.0.0"]){
+        [self changeIP:nil];
+    }
+    else
+        [appDelegate initNetworkCommunication];
+
     [_serverMessages setText:@""];
-    [appDelegate initNetworkCommunication];
+
 }
 - (void)applicationEnteredForeground:(NSNotification *)notification {
-    appDelegate.ipFieldHolder = @"192.168.0.119";
+    appDelegate.ipFieldHolder = [appDelegate getUserIP];
     [_serverMessages setText:@""];
     [appDelegate initNetworkCommunication];
 }
@@ -145,6 +150,7 @@
 - (IBAction)iPSet:(id)sender {
     appDelegate.ipFieldHolder = _ipField.text;
     [appDelegate initNetworkCommunication];
+    [appDelegate saveUserIP:_ipField.text];
     [self.view endEditing:YES];
     [_ipView setHidden:YES];
 }

@@ -10,6 +10,17 @@
 
 @implementation AppDelegate
 
+-(void)saveUserIP:(NSString*)ip {
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:ip forKey:USER_IP];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+
+-(NSString*)getUserIP{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    return [prefs objectForKey:USER_IP];
+}
 
 - (void)initNetworkCommunication {
     
@@ -84,7 +95,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[NSUserDefaults standardUserDefaults] registerDefaults:
+     @{
+       USER_IP : @"0.0.0.0",
+       }];
+    
     // Override point for customization after application launch.
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSDictionary *all = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
+    for(id key in all){
+        NSLog(@"KEY: %@ Value:%@",key,[[NSUserDefaults standardUserDefaults] objectForKey:key]);
+    }
+    
     return YES;
 }
 							

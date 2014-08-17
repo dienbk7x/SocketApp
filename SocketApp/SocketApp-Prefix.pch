@@ -15,7 +15,7 @@
     #import <Foundation/Foundation.h>
 #endif
 
-
+#define USER_IP @"user_ip"
 #define MESSAGES_FROM_SEVER_STD @"standard_report"
 #define MESSAGES_FROM_SEVER_USERS @"user_report"
 #define MESSAGES_FROM_SEVER_TEMP @"temperature_report"
