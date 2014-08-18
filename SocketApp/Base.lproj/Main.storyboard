@@ -12,6 +12,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="03.01-login-background.png" id="Jeh-Iy-xeG">
+                                <rect key="frame" x="-5" y="0.0" width="354" height="462"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <navigationBar contentMode="scaleToFill" id="4jh-YH-FfX">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -19,7 +23,7 @@
                                 <items>
                                     <navigationItem id="FvE-fp-8cA">
                                         <barButtonItem key="rightBarButtonItem" title="Server Details" id="8Rh-rd-YUA">
-                                            <color key="tintColor" red="0.0078431372550000003" green="0.62745098040000002" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.12549019610000001" green="0.3411764706" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <segue destination="qVS-EX-1Hx" kind="modal" modalTransitionStyle="flipHorizontal" id="UsB-Pg-ZaX"/>
                                             </connections>
@@ -36,7 +40,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Reboot Pi">
-                                            <color key="titleColor" red="0.1843137255" green="0.49803921569999998" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.12549019610000001" green="0.3411764706" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -65,18 +69,28 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view hidden="YES" contentMode="scaleToFill" id="OqD-2L-uB4">
-                                <rect key="frame" x="0.0" y="233" width="320" height="59"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5EI-au-6Do">
+                                <rect key="frame" x="103" y="398" width="115" height="115"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" backgroundImage="socketIcon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeIP:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="KKS-uQ-Bfh"/>
+                                </connections>
+                            </button>
+                            <view hidden="YES" contentMode="scaleToFill" id="Zqx-Gh-zrW">
+                                <rect key="frame" x="0.0" y="232" width="320" height="59"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="46m-zB-Kh5">
-                                        <rect key="frame" x="20" y="15" width="235" height="30"/>
+                                        <rect key="frame" x="14" y="14" width="245" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="join"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qfU-4q-jN9">
-                                        <rect key="frame" x="273" y="15" width="30" height="30"/>
+                                        <rect key="frame" x="275" y="14" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Set">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -87,25 +101,15 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5EI-au-6Do">
-                                <rect key="frame" x="103" y="398" width="115" height="115"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <state key="normal" backgroundImage="Icon-76.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="changeIP:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="KKS-uQ-Bfh"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0078431372550000003" green="0.62745098040000002" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="lLs-oM-zpM"/>
                     <connections>
                         <outlet property="ipField" destination="46m-zB-Kh5" id="a0p-40-EMd"/>
-                        <outlet property="ipView" destination="OqD-2L-uB4" id="OrW-uG-GC9"/>
+                        <outlet property="ipView" destination="Zqx-Gh-zrW" id="LU6-Xv-J06"/>
                         <outlet property="lightToggle" destination="gf3-Ve-Bnk" id="tLj-9j-bxJ"/>
                         <outlet property="logo" destination="5EI-au-6Do" id="I46-ZF-o4Y"/>
                         <outlet property="serverMessages" destination="0TO-49-4TW" id="ZOL-dh-6TY"/>
@@ -123,6 +127,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="03.01-login-background.png" id="Trg-Dy-BCE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" id="RV8-zD-nDK">
                                 <rect key="frame" x="12" y="75" width="294" height="71"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -137,7 +145,7 @@
                                 <items>
                                     <navigationItem id="kqo-RM-L95">
                                         <barButtonItem key="leftBarButtonItem" title="Done" id="PFG-fR-cnA">
-                                            <color key="tintColor" red="0.0078431372550000003" green="0.62745098040000002" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.12549019607843137" green="0.3411764705882353" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="done:" destination="qVS-EX-1Hx" id="Y04-HJ-rsg"/>
                                             </connections>
@@ -181,7 +189,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Icon-76.png" width="76" height="76"/>
+        <image name="03.01-login-background.png" width="320" height="568"/>
+        <image name="socketIcon.png" width="1024" height="1024"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

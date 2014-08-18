@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C4A33A619A1B5B800E1A6F0 /* 03.01-login-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C4A33A519A1B5B800E1A6F0 /* 03.01-login-background@2x.png */; };
+		9C4A33A819A1B71C00E1A6F0 /* socketIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C4A33A719A1B71C00E1A6F0 /* socketIcon.png */; };
 		9C61BE811990294700D62386 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C61BE801990294700D62386 /* Foundation.framework */; };
 		9C61BE831990294700D62386 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C61BE821990294700D62386 /* CoreGraphics.framework */; };
 		9C61BE851990294700D62386 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C61BE841990294700D62386 /* UIKit.framework */; };
@@ -56,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9C4A33A519A1B5B800E1A6F0 /* 03.01-login-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03.01-login-background@2x.png"; sourceTree = "<group>"; };
+		9C4A33A719A1B71C00E1A6F0 /* socketIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = socketIcon.png; sourceTree = "<group>"; };
 		9C61BE7D1990294700D62386 /* SocketApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocketApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C61BE801990294700D62386 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9C61BE821990294700D62386 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -124,6 +128,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9C4A33A419A1B5B800E1A6F0 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				9C4A33A719A1B71C00E1A6F0 /* socketIcon.png */,
+				9C4A33A519A1B5B800E1A6F0 /* 03.01-login-background@2x.png */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
 		9C61BE741990294700D62386 = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +170,7 @@
 		9C61BE861990294700D62386 /* SocketApp */ = {
 			isa = PBXGroup;
 			children = (
+				9C4A33A419A1B5B800E1A6F0 /* resources */,
 				9CAB6FAC199FDF7F008121D8 /* iPad */,
 				9CD8D45B199320380077AE11 /* icons */,
 				9C61BE8F1990294700D62386 /* AppDelegate.h */,
@@ -323,6 +337,7 @@
 				9C61BE991990294700D62386 /* Images.xcassets in Resources */,
 				9CD8D46D199320380077AE11 /* Icon-60@2x.png in Resources */,
 				9CD8D476199320380077AE11 /* Icon-Spotlight-40.png in Resources */,
+				9C4A33A619A1B5B800E1A6F0 /* 03.01-login-background@2x.png in Resources */,
 				9CD8D475199320380077AE11 /* Icon-Small@2x.png in Resources */,
 				9C61BE8B1990294700D62386 /* InfoPlist.strings in Resources */,
 				9CD8D46C199320380077AE11 /* Icon-60.png in Resources */,
@@ -336,6 +351,7 @@
 				9CD8D46E199320380077AE11 /* Icon-72.png in Resources */,
 				9CD8D473199320380077AE11 /* Icon-Small-50@2x.png in Resources */,
 				9CD8D47B199320380077AE11 /* iTunesArtwork@2x in Resources */,
+				9C4A33A819A1B71C00E1A6F0 /* socketIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

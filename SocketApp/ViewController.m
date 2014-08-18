@@ -44,8 +44,8 @@
     _logo.layer.borderColor = [[UIColor whiteColor] CGColor];
     _logo.layer.borderWidth = 6;
     
-    self.view.backgroundColor = [UIColor colorWithRed:(2/255.0f) green:(160/255.0f) blue:(224/255.0f) alpha:1];
-    _ipView.backgroundColor = self.view.backgroundColor;
+//    self.view.backgroundColor = [UIColor colorWithRed:(2/255.0f) green:(160/255.0f) blue:(224/255.0f) alpha:1];
+
 }
 
 
@@ -143,7 +143,7 @@
 
 - (IBAction)changeIP:(id)sender {
     _ipField.text = appDelegate.ipFieldHolder;
-    _ipField.keyboardType = UIKeyboardTypeDecimalPad;
+    _ipField.clearButtonMode = UITextFieldViewModeWhileEditing;
     [_ipView setHidden:NO];
 }
 
