@@ -54,8 +54,8 @@
                                 <rect key="frame" x="66" y="137" width="189" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="On"/>
-                                    <segment title="Off"/>
+                                    <segment title="OFF"/>
+                                    <segment title="ON"/>
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>

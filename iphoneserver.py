@@ -29,12 +29,12 @@ class RaspberryLight(Protocol):
 
 		if (data == 'P7H'):
 			msg = "Pin 7 is now High"
-			self.transport.write("""Lights Off""")
+			self.transport.write("""Lights ON""")
 			GPIO.output(7, True)
 
 		elif (data == 'P7L'):
 			msg = "Pin 7 is now Low"
-			self.transport.write("""Lights On""")
+			self.transport.write("""Lights OFF""")
 			GPIO.output(7, False)
 
 		if (data == 'reboot'):
